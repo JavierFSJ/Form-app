@@ -1,0 +1,94 @@
+<h2>Template: Básicos</h2>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <form (ngSubmit)="guardar()" #miForm="ngForm" autocomplete="off">
+      <!-- Producto -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label"> Producto: </label>
+        <div class="col-sm-9">
+          <input
+            [ngModel]="initForm.producto"
+            name="producto"
+            type="text"
+            class="form-control"
+            required
+            placeholder="Nombre del producto"
+            minlength="3"
+          />
+          <span class="form-text text-danger"
+                *ngIf="validName()">Debe ser de 3 letras</span>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label"> Precio del producto: </label>
+        <div class="col-sm-9">
+          <input
+            [ngModel]="initForm.precio"
+            name="precio"
+            type="number"
+            class="form-control"
+            required
+            placeholder="Precio producto"
+            min="0"
+          />
+          <span *ngIf="precioValido()">
+            El precio debe ser mayor a 0
+          </span>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">
+          Existencias del producto:
+        </label>
+        <!-- Custom Directive -->
+        <div class="col-sm-9">
+          <input
+            [ngModel]="initForm.existencias"
+            name="existencias"
+            type="number"
+            class="form-control"
+            customMin
+            required
+            [minimo]="0"
+            placeholder="Existencias producto"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-end" (click)="save()" [disabled]="!miForm.valid">
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div>
+  <div class="col">
+    <span>Valid</span>
+    {{ miForm.valid }}
+    <hr />
+
+    <span>Prestine</span>
+    {{ miForm.pristine }}
+    <hr />
+
+    <span>Touched</span>
+    {{ miForm.touched }}
+    <hr />
+
+    Valor
+    <pre>{{ miForm.value | json }}</pre>
+    <hr>
+
+    Custom Directive
+    <pre *ngIf="miForm.controls['existencias']">{{ miForm.controls['existencias'].errors | json }}</pre>
+  </div>
+</div>

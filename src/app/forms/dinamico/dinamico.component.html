@@ -1,0 +1,82 @@
+<h2>Template: <small>Dinamico</small></h2>
+<hr />
+
+<form (ngSubmit)="guardar()" #form="ngForm" autocomplete="off">
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Nombre</label>
+    <div class="col-sm-9">
+      <input type="text"
+             class="form-control"
+             [ngModel]="persona.nombre"
+             name="nombre"
+             required />
+        <span class="form-text text-danger"
+              *ngIf="form.controls['nombre']?.errors && form.touched">
+          Este campo es obligatorio
+        </span>
+    </div>
+  </div>
+
+
+  <!-- Agregar favorito -->
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Agregar</label>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input type="text"
+               class="form-control"
+               ngModel
+               name="nombreJuego"
+               placeholder="Agregar favorito"
+
+               />
+
+        <button class="btn btn-outline-primary" type="button" (click)="add()">
+          Add
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <hr>
+  <!-- List de juegos Favoritos -->
+  <div class="row mt-5">
+    <label class="col-sm-3 col-form-label">Juegos Favoritos</label>
+    <div class="col-sm-9">
+      <div *ngFor="let juego of persona.favoritos ; let i = index" class="input-group mb-3">
+        <input class="form-control"
+               type="text"
+               [(ngModel)]="juego.nombre"
+               [name]="i.toString()"
+               required
+               />
+        <button class="btn btn-danger" type="button" (click)="eliminar(i)">
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row mb-3">
+    <div class="col-sm-12">
+      <button
+        type="button"
+        class="btn btn-primary float-end"
+        (click)="guardar()"
+        [disabled]="form.invalid"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+
+<span>
+  Person
+</span>
+
+<pre> {{ persona | json}} </pre>
