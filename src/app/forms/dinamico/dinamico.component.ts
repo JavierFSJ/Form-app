@@ -12,7 +12,6 @@ interface Favorito{
   nombre: string;
 }
 
-
 @Component({
   selector: 'app-dinamico',
   templateUrl: './dinamico.component.html',
@@ -50,8 +49,6 @@ export class DinamicoComponent {
     if(value !== ''){
 
       /* Agregando */
-
-
       if(!this.persona.favoritos.length){
         this.persona.favoritos.push({id: 1 , nombre: value});
       }
@@ -59,10 +56,6 @@ export class DinamicoComponent {
         const id = this.persona.favoritos.length;
         this.persona.favoritos.push({id , nombre: value});
       }
-
-
-
-
 
     }
 
