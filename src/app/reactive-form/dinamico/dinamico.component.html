@@ -1,0 +1,79 @@
+<h2>Reactive: <small>Dinamico</small></h2>
+<hr />
+
+<form (ngSubmit)="save()" [formGroup]="miForm" autocomplete="off">
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Nombre</label>
+    <div class="col-sm-9">
+      <input type="text" class="form-control" formControlName="nombre" placeholder="Escribe tu nombre"/>
+      <span class="form-text text-danger" *ngIf="campoValido('nombre')">
+        Este campo es obligatorio
+      </span>
+    </div>
+  </div>
+
+
+  <!-- Agregar favorito -->
+  <div class="row mb-3">
+    <label class="col-sm-3 col-form-label">Agregar Favorito</label>
+    <div class="col-sm-9">
+      <div class="input-group">
+        <input type="text"
+               class="form-control"
+               [formControl]="nuevoFavorito"
+               placeholder="Agregar favorito ej. Halo, COD"
+               (keyup.enter)="add()"
+               />
+        <button class="btn btn-outline-primary" type="button" (click)="add()">
+          Add
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <hr>
+  <!-- List de juegos Favoritos -->
+  <div class="row mt-5">
+    <label class="col-sm-3 col-form-label">Juegos Favoritos</label>
+
+    <div class="col-sm-9" formArrayName="favoritos">
+      <div class="input-group mb-3" *ngFor="let favorito of favoritoArr.controls; let i = index">
+        <input [formControlName]="i" class="form-control" type="text"/>
+        <button class="btn btn-danger" type="button" (click)="remove(i)">
+          Remove
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="row mb-3">
+    <div class="col-sm-12">
+      <button type="submit" class="btn btn-primary float-end">
+        Guardar
+      </button>
+    </div>
+  </div>
+</form>
+
+<span>Valid</span>
+<pre>{{miForm.valid}}</pre>
+
+
+
+<span>
+  Person
+</span>
+
+<pre> {{ miForm.value | json}} </pre>
+
+<hr>
+
+<span> Nuevo Favorito Valid </span>
+<pre> {{ nuevoFavorito.valid | json}}</pre>
+
+<span> Nuevo Favorito Value </span>
+<pre> {{ nuevoFavorito.value | json}}</pre>

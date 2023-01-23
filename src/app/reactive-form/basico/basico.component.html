@@ -1,0 +1,85 @@
+<h2>Reactive: Básicos</h2>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <form  (ngSubmit)="save()" autocomplete="off" [formGroup]="miForm">
+      <!-- Producto -->
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label"> Producto: </label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nombre"
+            placeholder="Nombre del producto"
+          />
+          <span class="form-text text-danger"
+                *ngIf="compaValido('nombre')"
+               >Debe ser de 3 letras</span>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label"> Precio del producto: </label>
+        <div class="col-sm-9">
+          <input
+            formControlName="precio"
+            class="form-control"
+            placeholder="Precio producto"
+          />
+          <span  class="form-text text-danger" *ngIf="compaValido('precio')">
+            El precio debe ser mayor a 0
+          </span>
+        </div>
+      </div>
+
+      <div class="mb-3 row">
+        <label class="col-sm-3 col-form-label">
+          Existencias del producto:
+        </label>
+        <!-- Custom Directive -->
+        <div class="col-sm-9">
+          <input
+            formControlName="existencias"
+            type="number"
+            class="form-control"
+            placeholder="Existencias producto"
+          />
+          <span class="form-text text-danger" *ngIf="compaValido('existencias')">
+            La existencias deben ser mayor a 0
+          </span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-end">
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div>
+  <div class="col">
+    <span>Valid</span>
+    {{ miForm.valid }}
+    <hr />
+
+    <span>Prestine</span>
+    {{ miForm.pristine }}
+    <hr />
+
+    <span>Touched</span>
+    {{ miForm.touched }}
+    <hr />
+
+    Valor
+    <pre>{{ miForm.value | json }}</pre>
+    <hr>
+
+  </div>
+</div>

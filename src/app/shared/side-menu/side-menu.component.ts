@@ -19,9 +19,9 @@ export class SideMenuComponent {
   ];
 
   reactiveMenu: MenuItem[] = [
-    { texto: 'basico', ruta: 'form/basico' },
-    { texto: 'dinamico', ruta: 'form/dinamico' },
-    { texto: 'switches', ruta: 'form/switch' },
+    { texto: 'basico', ruta: 'reactive/basico' },
+    { texto: 'dinamico', ruta: 'reactive/dinamico' },
+    { texto: 'switches', ruta: 'reactive/switch' },
   ];
 
 
