@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   { path: 'form', loadChildren: ()=> import('./forms/forms.module').then( m => m.FormsModule) },
-  { path: 'reactive' , loadChildren: () => import('./reactive-form/reactive-form.module').then(m => m.ReactiveFormModule)}
+  { path: 'reactive' , loadChildren: () => import('./reactive-form/reactive-form.module').then(m => m.ReactiveFormModule)},
+  { path: 'validations' , loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)}
 
 ];
 
