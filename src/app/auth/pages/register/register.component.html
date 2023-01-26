@@ -1,1 +1,76 @@
-<p>register works!</p>
+<h2>Validaciones Personalizadas</h2>
+<hr>
+
+<div class="row">
+
+  <div class="col">
+    <form  (ngSubmit)="guardar()" autocomplete="off" [formGroup]="miForm">
+
+      <!-- Nombre -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Nombre</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" formControlName="nombre">
+          <span *ngIf="campoNoValido('nombre')" class="form-text text-danger">Formato Nombre y Apellido</span>
+        </div>
+      </div>
+
+
+      <!-- Email -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Email</label>
+        <div class="col-sm-9">
+          <input type="email" class="form-control" formControlName="email">
+          <span  *ngIf="campoNoValido('email')" class="form-text text-danger">Email no valido</span>
+        </div>
+      </div>
+
+      <!-- Username -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Username</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control">
+          <span class="form-text text-danger">Username no valido</span>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Password</label>
+        <div class="col-sm-9">
+          <input type="password" class="form-control">
+          <span class="form-text text-danger">Formato Nombre y Apellido</span>
+        </div>
+      </div>
+
+
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Confirmar Password</label>
+        <div class="col-sm-9">
+          <input type="password" class="form-control">
+          <span class="form-text text-danger">El password no coincide</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-primary float-end">
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+</div>
+
+
+
+<h5>Valid</h5>
+<pre>{{miForm.valid}}</pre>
+
+<hr>
+
+<h5>Nombre</h5>
+<pre>{{miForm.controls['nombre'].errors | json}}</pre>
