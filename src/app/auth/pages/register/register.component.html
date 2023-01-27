@@ -29,8 +29,8 @@
       <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Username</label>
         <div class="col-sm-9">
-          <input type="text" class="form-control">
-          <span class="form-text text-danger">Username no valido</span>
+          <input formControlName="username" type="text" class="form-control">
+          <span *ngIf="campoNoValido('username')" class="form-text text-danger">Username no puede ser strider</span>
         </div>
       </div>
 
@@ -38,8 +38,7 @@
       <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Password</label>
         <div class="col-sm-9">
-          <input type="password" class="form-control">
-          <span class="form-text text-danger">Formato Nombre y Apellido</span>
+          <input formControlName="password" type="password" class="form-control">
         </div>
       </div>
 
@@ -47,8 +46,8 @@
       <div class="row mb-3">
         <label class="col-sm-3 col-form-label">Confirmar Password</label>
         <div class="col-sm-9">
-          <input type="password" class="form-control">
-          <span class="form-text text-danger">El password no coincide</span>
+          <input formControlName="passwordConfirm" type="password" class="form-control">
+          <span *ngIf="campoNoValido('passwordConfirm')" class="form-text text-danger">El password no coincide</span>
         </div>
       </div>
 
@@ -69,8 +68,23 @@
 
 <h5>Valid</h5>
 <pre>{{miForm.valid}}</pre>
+<hr>
+
+<h5>Form Error</h5>
+<pre>{{miForm.errors | json}}</pre>
 
 <hr>
 
 <h5>Nombre</h5>
 <pre>{{miForm.controls['nombre'].errors | json}}</pre>
+
+<hr>
+
+<h5>Username</h5>
+<pre>{{miForm.controls['username'].errors | json}}</pre>
+
+<hr>
+
+<h5>Passwords</h5>
+<pre>{{miForm.controls['password'].errors | json}}</pre>
+<pre>{{miForm.controls['passwordConfirm'].errors | json}}</pre>

@@ -1,23 +1,25 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { nombreApellidoPattern, emailPattern, noPuedeSerStrider } from '../../../shared/validator/validaciones';
+import { ValidatorService } from '../../../shared/validatorService/validator.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent {
-
-
-  //TODO: TEMP
-
-  nombreApellidoPattern: string = '([a-zA-Z]+) ([a-zA-Z]+)';
-  emailPattern: string = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
+export class RegisterComponent implements OnInit {
 
   miForm: FormGroup = this.fb.group(
     {
-      nombre: ['', [Validators.required , Validators.pattern(this.nombreApellidoPattern)]],
-      email: ['', [Validators.required , Validators.pattern(this.emailPattern)]],
+      nombre: ['', [Validators.required , Validators.pattern(this.vs.nombreApellidoPattern)]],
+      email: ['', [Validators.required , Validators.pattern(this.vs.emailPattern)]],
+      username: ['', [Validators.required , this.vs.noPuedeSerStrider]],
+      password: ['' , [Validators.required]],
+      passwordConfirm: ['' , [Validators.required]]
+    },
+    {
+      validators: [this.vs.camposIguales('password' , 'passwordConfirm') ]
     }
   )
 
@@ -26,11 +28,18 @@ export class RegisterComponent {
       this.miForm.get(campo)?.touched;
   }
 
+  constructor(private fb: FormBuilder,
+              private vs: ValidatorService)
+  {
 
-
-  constructor(private fb: FormBuilder) {
+  }
+  ngOnInit(): void {
     this.miForm.reset( {
       nombre: 'Javier Sanchez',
+      email: 'alguien@alguien.com',
+      username: 'HUNTER',
+      password: '123',
+      passwordConfirm: '123'
     })
   }
 
